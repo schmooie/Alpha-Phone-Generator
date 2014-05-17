@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('phoneApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, Words) {
+
+  	var wordLib = Words.getWords();
+
   	var alphaHash = {
 			1: ['1'],
 			2: ['a','b','c'],
@@ -15,11 +18,6 @@ angular.module('phoneApp')
 			0: ['0']
 		};
 
-		var wordLib = {
-			3: ['fat', 'cow'],
-			4: ['fuck', 'cows']
-		};
-
 		var getCombos = function(arr, n) {
 			var ret = [];
 	    if (n === 1) {
@@ -30,9 +28,7 @@ angular.module('phoneApp')
 	        }
 	    } else {
 	        for(var i = 0; i < arr.length; i++) {
-	        	// console.log(arr[i]);
 	            var elem = arr.shift();
-	            // console.log(elem);
 
 	            for(var j = 0; j < elem.length; j++) {
 	                var childperm = getCombos(arr.slice(), n-1);
@@ -45,16 +41,16 @@ angular.module('phoneApp')
 	    }
 
 	    return ret.map(function(el) {
-				el.reduce(function(prev, curr) {
-					return prev.toString()+curr.toString();
+				return el.reduce(function(prev, curr) {
+					return prev+curr;
 				}, '');
 			});
 		};
 
-		var findThreeWord = function(num) {
+		var findWord = function(num) {
 			var numLetters = [];
 
-			num.forEach(function(el) {
+			num.split('').forEach(function(el) {
 				numLetters.push(alphaHash[el]);
 			});
 
@@ -67,17 +63,15 @@ angular.module('phoneApp')
 					return el;
 				}
 			});
+			console.log(validWords);
+			return validWords[Math.floor(Math.random() * validWords.length)];
 		};
 
-		// var findFourWord = function(num) {
-
-		// };
-
-    $scope.number = '555-555-5555';
+    $scope.number = '244-277-2287';
     $scope.convertNumber = function () {
     	var number = $scope.number.replace(/[()-.]/g, "").replace(/\s/g,"");
 
-    	$scope.convertedNumber = findThreeWord(number.slice(0,3)) + findThreeWord(number.slice(3,6)) + findThreeWord(number.slice(6));
+    	$scope.convertedNumber = findWord(number.slice(0,3)) + ' ' + findWord(number.slice(3,6)) + ' ' + findWord(number.slice(6));
     	// $scope.convertedNumber = number; --- SET FINAL RESULT TO convertedNumber
     };
   });

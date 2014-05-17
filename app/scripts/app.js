@@ -3,7 +3,8 @@
 angular
   .module('phoneApp', [
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'Words.factories'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -15,3 +16,5 @@ angular
         redirectTo: '/'
       });
   });
+
+angular.module('Words.factories', []);
