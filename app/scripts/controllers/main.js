@@ -97,12 +97,12 @@ angular.module('phoneApp')
 			return word.join('').toUpperCase();
 		};
 
-    $scope.number = '559-706-3146';
+    $scope.number = '212-867-5309';
 
     $scope.convertNumber = function () {
     	var number = $scope.number.replace(/[()-.]/g, '').replace(/\s/g, '');
 
-    	var numberSplits = [[0,3,6], [0,4,7], [0,3,7], [0,5], [0,6], [0,4], [0,2,5], [0,2,4,7], [0,3,5], [0,4,6], [0,4,6,8], [0,3,5,8]];
+    	var numberSplits = [[0,7], [0,3], [0,3,6], [0,4,7], [0,3,7], [0,5], [0,6], [0,4], [0,5,7], [0,2,5], [0,3,5], [0,2,6], [0,2,6], [0,4,8], [0,2,4], [0,2,8], [0,6,8]];
 
     	var numberWords = '';
 
