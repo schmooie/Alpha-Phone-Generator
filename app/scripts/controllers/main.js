@@ -48,6 +48,7 @@ angular.module('phoneApp')
 		};
 
 		var findWord = function(num) {
+			console.log(num.length, 'numLength');
 			var numLetters = [];
 			var zeroOrOneIdx = [];
 
@@ -101,17 +102,16 @@ angular.module('phoneApp')
     $scope.convertNumber = function () {
     	var number = $scope.number.replace(/[()-.]/g, '').replace(/\s/g, '');
 
-    	var numberSplits = [[0,3,6], [0,4,7], [0,3,7], [0,5], [0,6], [0,4]];
+    	var numberSplits = [[0,3,6], [0,4,7], [0,3,7], [0,5], [0,6], [0,4], [0,2,5], [0,2,4,7], [0,3,5], [0,4,6], [0,4,6,8], [0,3,5,8]];
 
     	var numberWords = '';
 
     	for ( var i = 0; i < numberSplits.length; i++ ) {
-        debugger;
     		var splits = numberSplits[i];
     		var count = 0;
 
     		for ( var j = 0; j < splits.length; j++ ) {
-          var start = splits[j]
+          var start = splits[j];
           var end = splits[j + 1];
 
     			var word = findWord(number.slice(start, end));
