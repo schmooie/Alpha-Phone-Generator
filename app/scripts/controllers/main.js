@@ -75,7 +75,7 @@ angular.module('phoneApp')
 					return el;
 				}
 			});
-			console.log(validWords);
+			console.log('valid words', validWords);
 			var word = validWords[Math.floor(Math.random() * validWords.length)];
 
 			if ( typeof word === 'undefined' ) {
@@ -87,7 +87,7 @@ angular.module('phoneApp')
 			// console.log(word);
 
 			zeroOrOneIdx.forEach(function(el) {
-				console.log(el);
+				// console.log(el);
 				word[el.index] = el.letter;
 			});
 
@@ -96,19 +96,26 @@ angular.module('phoneApp')
 			return word.join('').toUpperCase();
 		};
 
-    $scope.number = '138-277-2287';
+    $scope.number = '559-706-3146';
+
     $scope.convertNumber = function () {
     	var number = $scope.number.replace(/[()-.]/g, '').replace(/\s/g, '');
 
-    	var numberSplits = [[0,3,6], [0,5], [0,6], [0,4]];
+    	var numberSplits = [[0,3,6], [0,4,7], [0,3,7], [0,5], [0,6], [0,4]];
 
     	var numberWords = '';
 
     	for ( var i = 0; i < numberSplits.length; i++ ) {
+        debugger;
     		var splits = numberSplits[i];
     		var count = 0;
-    		for ( var j = 1; j < splits.length; j++ ) {
-    			var word = findWord(number.slice(splits[j - 1], splits[j]));
+
+    		for ( var j = 0; j < splits.length; j++ ) {
+          var start = splits[j]
+          var end = splits[j + 1];
+
+    			var word = findWord(number.slice(start, end));
+
     			if ( typeof word === 'undefined' ) {
     				break;
     			} else {
@@ -119,7 +126,9 @@ angular.module('phoneApp')
 
     		if ( count === splits.length ) {
     			break;
-    		}
+    		} else {
+          numberWords = '';
+        }
     	}
 
     	$scope.convertedNumber = numberWords;
